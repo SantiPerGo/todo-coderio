@@ -1,6 +1,9 @@
 package com.coderio.interview.dto;
 
+import com.coderio.interview.enums.PriorityTaskEnum;
 import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
@@ -13,6 +16,7 @@ public class TaskDTO {
     @NotBlank
     private String name;
     private String description;
-    private String priority;
+    @Enumerated(EnumType.STRING)
+    private PriorityTaskEnum priority;
     private Boolean isCompleted;
 }

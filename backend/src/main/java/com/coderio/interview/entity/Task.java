@@ -1,5 +1,6 @@
 package com.coderio.interview.entity;
 
+import com.coderio.interview.enums.PriorityTaskEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -17,8 +18,11 @@ public class Task {
 
     @NotBlank
     private String name;
+
     private String description;
-    private String priority;
+
+    @Enumerated(EnumType.STRING)
+    private PriorityTaskEnum priority;
 
     @Column(name="is_completed")
     private Boolean isCompleted;
