@@ -1,0 +1,26 @@
+<div class="flex flex-col min-h-screen">
+    <nav>
+        <app-nav></app-nav>
+    </nav>
+    
+    <main class="flex-grow grid justify-items-center items-center gap-4 m-8"
+        [class.md:grid-cols-2]="taskList.length > 0" [class.lg:grid-cols-3]="taskList.length > 1"
+        [class.xl:grid-cols-4]="taskList.length > 2" [class.2xl:grid-cols-5]="taskList.length > 3">
+        @for (task of taskList; track $index) {
+            <app-task [task]="task"></app-task>
+        }
+
+        <div id="empty-task" class="flex flex-col justify-center items-center cursor-pointer md:m-0">
+            <h2>Agregar una<br>nueva tarea</h2>
+            <p class="mt-8">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>              
+            </p>
+        </div>
+    </main>
+    
+    <footer>
+        <app-footer></app-footer>
+    </footer>
+</div>

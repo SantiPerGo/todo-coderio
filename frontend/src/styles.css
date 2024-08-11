@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    --black: #0C0C1E;
+    --white: #F2F5F7;
+    --red: #ff285b;
+    --lightred: rgba(255, 40, 91, 0.1);
+    --darkgray: #515861;
+    --gray: #abb8c3;
+    --lightgray: #E2E2E6;
+    --green: forestgreen;
+    --lightgreen: rgba(34, 139, 34, 0.1);
+    --blue: #0072E3;
+    --yellow: #fcb900;
+    --lightyellow: rgba(252, 185, 0, 0.1);
+}

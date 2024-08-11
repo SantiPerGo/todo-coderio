@@ -1,0 +1,80 @@
+#container {    
+    width: 20rem;
+    height: 20rem;
+    background-color: var(--lightgray);
+    padding: 1rem;
+}
+
+p {
+    margin: 0.5rem;
+}
+
+#title {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#description {
+    font-size: 0.8rem;
+    overflow: hidden;
+}
+
+/* Priority styles */
+
+#container.high {
+    background-color: var(--lightred);
+}
+
+#container.medium {
+    background-color: var(--lightyellow);
+}
+
+#container.low {
+    background-color: var(--lightgreen);
+}
+
+#priority {
+    border: 1px solid var(--black);
+    border-radius: 1rem;
+    padding: 0.2rem 1rem;
+}
+
+#priority.high,
+#priority.medium,
+#priority.low {
+    color: var(--white);
+}
+
+#priority.high {
+    border-color: var(--red);
+    background-color: var(--red);
+}
+
+#priority.medium {
+    border-color: var(--yellow);
+    background-color: var(--yellow);
+}
+
+#priority.low {
+    border-color: var(--green);
+    background-color: var(--green);
+}
+
+/* Icons styles */
+
+#check,
+#edit,
+#delete {
+    color: var(--darkgray);
+}
+
+#check:hover,
+#edit:hover,
+#delete:hover {
+    fill: rgba(255, 255, 255, 0.5);
+    color: var(--black);
+    scale: 1.1;
+}
