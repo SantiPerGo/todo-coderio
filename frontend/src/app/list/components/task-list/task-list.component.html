@@ -2,10 +2,10 @@
     [class.md:grid-cols-2]="taskList.length > 0" [class.lg:grid-cols-3]="taskList.length > 1"
     [class.xl:grid-cols-4]="taskList.length > 2" [class.2xl:grid-cols-5]="taskList.length > 3">
     @for (task of taskList; track $index) {
-        <app-task [task]="task"></app-task>
+        <app-task [task]="task" (onTaskDeleted)="deleteTask($index, $event)"></app-task>
     }
 
-    <div id="empty-task" class="flex flex-col justify-center items-center cursor-pointer md:m-0">
+    <div id="empty-task" class="flex flex-col justify-center items-center cursor-pointer md:m-0" (click)="showTaskDialog = true">
         <h2>Create a<br>new task</h2>
         <p class="mt-8">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
@@ -14,3 +14,8 @@
         </p>
     </div>
 </div>
+
+@if (showTaskDialog) {
+    <app-create-edit-dialog (onTaskChange)="createTask($event)"
+        (onVisibleChange)="this.showTaskDialog = false"></app-create-edit-dialog>
+}

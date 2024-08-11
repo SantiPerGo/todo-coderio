@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
 import { TaskDTO } from '../../models/task-dto';
 import { TaskComponent } from './components/task/task.component';
+import { CreateEditDialogComponent } from './components/create-edit-dialog/create-edit-dialog.component';
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [TaskComponent],
+  imports: [TaskComponent, CreateEditDialogComponent],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.css'
 })
 export class TaskListComponent {
+  protected showTaskDialog: boolean = false;
   protected taskList: TaskDTO[] = [
     {
       id: 0,
@@ -20,24 +22,27 @@ export class TaskListComponent {
     },
     {
       id: 1,
-      name: 'Ejemplo',
-      description: null,
-      priority: null,
-      isCompleted: null
+      name: 'Ejemplo'
     },
     {
       id: 2,
       name: 'Ejemplo',
-      description: null,
-      priority: 'MEDIUM',
-      isCompleted: null
+      priority: 'MEDIUM'
     },
     {
       id: 3,
       name: 'Ejemplo',
-      description: null,
-      priority: 'LOW',
-      isCompleted: null
+      priority: 'LOW'
     }
   ];
+
+  protected deleteTask(index: number, isConfirmed: boolean) {
+    if(isConfirmed)
+      this.taskList.splice(index, 1);
+  }
+
+  protected createTask(task: TaskDTO) {
+    this.taskList.push(task);
+    this.showTaskDialog = false;
+  }
 }

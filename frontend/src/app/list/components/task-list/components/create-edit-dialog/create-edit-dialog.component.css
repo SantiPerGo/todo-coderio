@@ -10,6 +10,72 @@
     background-color: var(--green);
 }
 
-#btn-confirm:hover {
+#btn-confirm:hover:not(:disabled) {
     background-color: var(--darkgreen);
+}
+
+button:disabled {
+    opacity: 0.5;
+}
+
+/* Text styles */
+
+input,
+textarea {
+    width: 100%;
+}
+
+input,
+select,
+textarea {
+    margin: 1rem 0;
+    padding: 1rem;
+    border: 1px solid var(--gray);
+    border-radius: 1rem;
+}
+
+.error-input,
+.error-input:focus {
+    border: 1px solid var(--red);
+    outline: var(--red);
+}
+
+.error-text {
+    color: var(--red);
+    margin-top: -0.5rem;
+}
+
+/* Priority styles */
+
+#priority {
+    border: 1px solid var(--black);
+    border-radius: 5rem;
+    padding: 0.2rem 1rem;
+    outline: transparent;
+}
+
+#priority:has(option[value="HIGH"]:checked),
+#priority:has(option[value="MEDIUM"]:checked),
+#priority:has(option[value="LOW"]:checked) {
+    color: var(--white);
+}
+
+#priority:has(option[value="HIGH"]:checked) {
+    border-color: var(--red);
+    background-color: var(--red);
+}
+
+#priority:has(option[value="MEDIUM"]:checked) {
+    border-color: var(--yellow);
+    background-color: var(--yellow);
+}
+
+#priority:has(option[value="LOW"]:checked) {
+    border-color: var(--green);
+    background-color: var(--green);
+}
+
+#priority option {
+    color: var(--black);
+    background-color: var(--white);
 }

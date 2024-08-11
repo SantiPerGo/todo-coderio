@@ -1,9 +1,9 @@
 export interface TaskDTO {
     id: number;
     name: string;
-    description: string | null;
-    priority: PriorityTask;
-    isCompleted: boolean | null;
+    description?: string;
+    priority?: PriorityTask;
+    isCompleted?: boolean;
 }
 
-type PriorityTask = 'LOW' | 'MEDIUM' | 'HIGH' | undefined | null;
+type PriorityTask = 'LOW' | 'MEDIUM' | 'HIGH';
