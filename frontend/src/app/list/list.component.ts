@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { NavComponent } from './components/nav/nav.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { TaskComponent } from './components/task/task.component';
-import { TaskDTO } from './models/task-dto';
+import { TaskListComponent } from './components/task-list/task-list.component';
 
 @Component({
   selector: 'app-list',
@@ -10,40 +9,10 @@ import { TaskDTO } from './models/task-dto';
   imports: [
     NavComponent,
     FooterComponent,
-    TaskComponent
+    TaskListComponent
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css'
 })
 export class ListComponent {
-  protected taskList: TaskDTO[] = [
-    {
-      id: 0,
-      name: 'Hacer proyecto de Coderio para entregar de tarea',
-      description: 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.',
-      priority: 'HIGH',
-      isCompleted: false
-    },
-    {
-      id: 1,
-      name: 'Ejemplo',
-      description: null,
-      priority: null,
-      isCompleted: null
-    },
-    {
-      id: 2,
-      name: 'Ejemplo',
-      description: null,
-      priority: 'MEDIUM',
-      isCompleted: null
-    },
-    {
-      id: 3,
-      name: 'Ejemplo',
-      description: null,
-      priority: 'LOW',
-      isCompleted: null
-    }
-  ];
 }

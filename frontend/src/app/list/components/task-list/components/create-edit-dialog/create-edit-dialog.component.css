@@ -1,0 +1,15 @@
+#btn-cancel {
+    background-color: var(--gray);
+}
+
+#btn-cancel:hover {
+    background-color: var(--darkgray);
+}
+
+#btn-confirm {
+    background-color: var(--green);
+}
+
+#btn-confirm:hover {
+    background-color: var(--darkgreen);
+}
