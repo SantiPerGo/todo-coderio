@@ -11,10 +11,6 @@
     width: 15rem;
 }
 
-.flex {
-    font-family: "Montserrat", sans-serif;
-}
-
 #dot {
     color: var(--red);
     font-size: 2rem;
