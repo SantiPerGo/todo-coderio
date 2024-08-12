@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "name": "Create Coderio project to submit as a task",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    "priority": "HIGH",
+    "isCompleted": false
+  },
+  {
+    "id": 2,
+    "name": "Completed task",
+    "isCompleted": true
+  },
+  {
+    "id": 3,
+    "name": "Send technical test by email",
+    "priority": "MEDIUM",
+    "isCompleted": false
+  },
+  {
+    "id": 4,
+    "name": "Example",
+    "description": "Not only has it survived 500 years, but it also entered as filler text in electronic documents, remaining essentially the same as the original. It was popularized in the 1960s with the creation of Letraset sheets, which contained passages of Lorem Ipsum.",
+    "priority": "LOW",
+    "isCompleted": false
+  }
+]
