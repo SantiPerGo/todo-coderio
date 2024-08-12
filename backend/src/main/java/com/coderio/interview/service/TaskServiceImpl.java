@@ -30,9 +30,8 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public ResponseEntity<TaskDTO> createTask(TaskDTO dto) {
-        Task task = TaskMapper.mapTaskDtoToEntity(dto);
-        taskRepository.saveAndFlush(task);
-        return new ResponseEntity<>(dto, HttpStatus.CREATED);
+        Task task = taskRepository.saveAndFlush(TaskMapper.mapTaskDtoToEntity(dto));
+        return new ResponseEntity<>(TaskMapper.mapTaskEntityToDto(task), HttpStatus.CREATED);
     }
 
     @Override
@@ -42,9 +41,8 @@ public class TaskServiceImpl implements TaskService {
         Optional<Task> optionalTask = taskRepository.findById(dto.getId());
 
         if(optionalTask.isPresent()){
-            Task task = TaskMapper.mapTaskDtoToEntity(dto);
-            taskRepository.saveAndFlush(task);
-            return new ResponseEntity<>(dto, HttpStatus.OK);
+            Task task = taskRepository.saveAndFlush(TaskMapper.mapTaskDtoToEntity(dto));
+            return new ResponseEntity<>(TaskMapper.mapTaskEntityToDto(task), HttpStatus.OK);
         } else
             return ResponseEntity.notFound().build();
     }
