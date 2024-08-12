@@ -49,15 +49,15 @@ export class CreateEditDialogComponent {
         this.onTaskChange.emit({
           id: this.task.id,
           name: taskValue.name,
-          description: taskValue.description,
-          priority: taskValue.priority === 'NONE' ? null : taskValue,
+          description: taskValue.description === '' ? null : taskValue.description,
+          priority: taskValue.priority === 'NONE' ? null : taskValue.priority,
           isCompleted: this.task.isCompleted
         });
       else
         this.onTaskChange.emit({
           name: taskValue.name,
-          description: taskValue.description,
-          priority: taskValue.priority === 'NONE' ? null : taskValue
+          description: taskValue.description === '' ? null : taskValue.description,
+          priority: taskValue.priority === 'NONE' ? null : taskValue.priority
         });
     }
   }
