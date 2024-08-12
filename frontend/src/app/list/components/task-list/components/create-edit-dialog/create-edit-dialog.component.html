@@ -7,9 +7,14 @@
 
         <p>
             <input id="name" type="text" placeholder="Write a task name" formControlName="name"
-                [class.error-input]="name?.invalid && (name?.dirty || name?.touched) && name?.hasError('required')">
-            @if (name?.invalid && (name?.dirty || name?.touched) && name?.hasError('required')) {
-                <p class="error-text">Name is required</p>
+                [class.error-input]="name?.invalid && (name?.dirty || name?.touched) && (name?.hasError('required') || name?.hasError('maxlength'))">
+        
+            @if (name?.invalid && (name?.dirty || name?.touched)) {
+                @if (name?.hasError('required')) {
+                    <p class="error-text">Name is required</p>
+                } @else if(name?.hasError('maxlength')) {
+                    <p class="error-text">Name cannot exceed 100 characters.</p>
+                }                
             }
         </p>
 
@@ -23,11 +28,17 @@
             </select>
         </p>
         
-        <p><textarea id="description" rows="5" placeholder="Write a description for the task (optional)" formControlName="description"></textarea></p>
+        <p>
+            <textarea id="description" rows="5" placeholder="Write a description for the task (optional)" formControlName="description"
+                [class.error-input]="description?.invalid && (description?.dirty || description?.touched) && (description?.hasError('required') || description?.hasError('maxlength'))"></textarea>
+            @if(description?.invalid && (description?.dirty || description?.touched) && description?.hasError('maxlength')) {
+                <p class="error-text mb-4">Description cannot exceed 255 characters.</p>
+            }
+        </p>
 
         <div class="flex justify-end space-x-2">
             <button class="px-4 py-2 text-white rounded" id="btn-cancel" (click)="onVisibleChange.emit()">Cancel</button>
-            <button class="px-4 py-2 text-white rounded" id="btn-confirm" type="submit" [disabled]="!taskForm.valid" (click)="taskForm.valid ? onTaskChange.emit(this.taskForm.value) : null">
+            <button class="px-4 py-2 text-white rounded" id="btn-confirm" type="submit" [disabled]="!taskForm.valid" (click)="emitTaskValue()">
                 {{ task ? 'Update' : 'Create' }}
             </button>
         </div>

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TaskDTO } from '../../../../models/task-dto';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { CreateEditDialogComponent } from '../create-edit-dialog/create-edit-dialog.component';
+import { TaskService } from '../../../../services/task.service';
 
 @Component({
   selector: 'app-task',
@@ -11,20 +12,26 @@ import { CreateEditDialogComponent } from '../create-edit-dialog/create-edit-dia
   styleUrl: './task.component.css'
 })
 export class TaskComponent {
-  @Input() task: TaskDTO | undefined;
+  @Input() task?: TaskDTO;
 
   @Output() onTaskDeleted = new EventEmitter<boolean>();
 
   protected showConfirmDialog = false;
   protected showEditDialog = false;
+  
+  constructor(private taskService: TaskService) {}
 
   protected deleteTask(isConfirmed: boolean) {
     this.showConfirmDialog = false;
     this.onTaskDeleted.emit(isConfirmed);
   }
 
-  protected updateTask(task: TaskDTO) {
-    this.task = task;
+  protected updateTask(oldTask: TaskDTO) {
     this.showEditDialog = false;
+
+    this.taskService.updateTask(oldTask).subscribe({
+      next: (task: TaskDTO) => this.task = task,
+      error: response => console.error(response)
+    });    
   }
 }

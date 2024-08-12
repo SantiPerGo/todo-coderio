@@ -1,6 +1,6 @@
 <div id="container" class="flex flex-col h-full" [class]="task?.priority?.toLowerCase()">
     <p id="title">{{ task?.name }}</p>
-    <p><span id="priority" [class]="task?.priority?.toLowerCase()">
+    <p><span id="priority" [class]="task?.priority?.toLowerCase()" class="select-none">
         {{
             task?.priority === 'HIGH' ? 'High' :
             task?.priority === 'MEDIUM' ? 'Medium' :

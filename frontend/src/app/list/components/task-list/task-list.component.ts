@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { TaskDTO } from '../../models/task-dto';
 import { TaskComponent } from './components/task/task.component';
 import { CreateEditDialogComponent } from './components/create-edit-dialog/create-edit-dialog.component';
+import { TaskService } from '../../services/task.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-task-list',
@@ -12,37 +14,58 @@ import { CreateEditDialogComponent } from './components/create-edit-dialog/creat
 })
 export class TaskListComponent {
   protected showTaskDialog: boolean = false;
-  protected taskList: TaskDTO[] = [
-    {
-      id: 0,
-      name: 'Hacer proyecto de Coderio para entregar de tarea',
-      description: 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.',
-      priority: 'HIGH',
-      isCompleted: false
-    },
-    {
-      id: 1,
-      name: 'Ejemplo'
-    },
-    {
-      id: 2,
-      name: 'Ejemplo',
-      priority: 'MEDIUM'
-    },
-    {
-      id: 3,
-      name: 'Ejemplo',
-      priority: 'LOW'
-    }
-  ];
+  protected taskList: TaskDTO[] = [];
 
-  protected deleteTask(index: number, isConfirmed: boolean) {
-    if(isConfirmed)
-      this.taskList.splice(index, 1);
+  constructor(private taskService: TaskService) {}
+
+  ngOnInit() {
+    this.taskService.getTasks().subscribe({
+      next: (taskList: TaskDTO[]) => {
+        this.taskList = taskList;
+        this.reorderTasks();
+      }, error: response => console.error(response)
+    })
   }
 
-  protected createTask(task: TaskDTO) {
-    this.taskList.push(task);
+  protected deleteTask(index: number, isConfirmed: boolean, task: TaskDTO) {
+    if(isConfirmed)
+      this.taskService.deleteTask(task.id).subscribe({
+        next: () => this.taskList.splice(index, 1),
+        error: response => console.error(response)
+      });
+  }
+
+  protected createTask(newTask: TaskDTO) {
     this.showTaskDialog = false;
+
+    this.taskService.createTask(newTask).subscribe({
+      next: (task: TaskDTO) => {
+        this.taskList.push(task);
+        this.reorderTasks();
+      },
+      error: response => console.error(response)
+    });
+  }
+
+  private reorderTasks() {
+    // Priority mapping
+    const priorityOrder: { [key in 'NONE' | 'LOW' | 'MEDIUM' | 'HIGH']?: number } = {
+      NONE: 0,
+      LOW: 1,
+      MEDIUM: 2,
+      HIGH: 3
+    };
+  
+    // Sorting function
+    this.taskList.sort((a, b) => {
+      // Compare by priority first
+      const priorityA = priorityOrder[a.priority ?? 'NONE'] ?? 0;
+      const priorityB = priorityOrder[b.priority ?? 'NONE'] ?? 0;
+      if (priorityA !== priorityB)
+        return priorityA - priorityB;
+  
+      // If priorities are the same, compare by name alphabetically
+      return a.name.localeCompare(b.name);
+    });
   }
 }

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TaskDTO } from '../../../../models/task-dto';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, MaxLengthValidator, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-edit-dialog',
@@ -14,17 +14,16 @@ export class CreateEditDialogComponent {
   @Output() onVisibleChange = new EventEmitter<void>();
   @Output() onTaskChange = new EventEmitter<TaskDTO>();
 
-  protected taskForm: FormGroup = new FormGroup({
-    name: new FormControl('', Validators.required),
-    description: new FormControl(''),
-    priority: new FormControl('NONE')
-  });
+  protected taskForm: FormGroup = new FormGroup({});
 
   ngOnInit() {
     if(this.task) {
       this.taskForm = new FormGroup({
-        name: new FormControl(this.task.name, Validators.required),
-        description: new FormControl(this.task.description),
+        name: new FormControl(this.task.name, [
+          Validators.required,
+          Validators.maxLength(100)
+        ]),
+        description: new FormControl(this.task.description, Validators.maxLength(255)),
         priority: new FormControl(this.task.priority ?? 'NONE')
       });
     }
@@ -32,5 +31,22 @@ export class CreateEditDialogComponent {
 
   protected get name() {
     return this.taskForm.get('name');
+  }
+
+  protected get description() {
+    return this.taskForm.get('description');
+  }
+
+  protected emitTaskValue() {
+    if(this.taskForm.valid && this.task) {
+      const taskValue = this.taskForm.value;
+      this.onTaskChange.emit({
+        id: this.task.id,
+        name: taskValue.name,
+        description: taskValue.description,
+        priority: taskValue.priority === 'NONE' ? null : taskValue,
+        isCompleted: this.task.isCompleted
+      });
+    }
   }
 }
