@@ -18,6 +18,7 @@ export class TaskComponent {
 
   @Output() onTaskDeleted = new EventEmitter<boolean>();
   @Output() onTaskCompleted = new EventEmitter<void>();
+  @Output() onTaskUpdated = new EventEmitter<TaskDTO>();
 
   @ViewChild('confettiButton') confettiButton!: ElementRef;
   protected showConfirmDialog = false;
@@ -34,7 +35,10 @@ export class TaskComponent {
     this.showEditDialog = false;
 
     this.taskService.updateTask(oldTask).subscribe({
-      next: (task: TaskDTO) => this.task = task,
+      next: (task: TaskDTO) => {
+        this.task = task;
+        this.onTaskUpdated.emit(task);
+      },
       error: response => console.error(response)
     });    
   }

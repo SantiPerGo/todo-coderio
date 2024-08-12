@@ -4,7 +4,7 @@
 <div class="grid justify-items-center items-center gap-4 m-8" id="task-list">
     @for (task of filteredTasks; track task.id) {
         <app-task [task]="task" (onTaskDeleted)="deleteTask($index, $event, task)"
-            (onTaskCompleted)="reorderTasks()"></app-task>
+            (onTaskCompleted)="reorderTasks()" (onTaskUpdated)="updateTask($index, $event)"></app-task>
     }
 
     <div id="empty-task" class="flex flex-col justify-center items-center cursor-pointer md:m-0" (click)="showTaskDialog = true">

@@ -37,6 +37,11 @@ export class TaskListComponent {
       });
   }
 
+  protected updateTask(index: number, task: TaskDTO) {
+    this.taskList[index] = task;
+    this.reorderTasks();
+  }
+
   protected createTask(newTask: TaskDTO) {
     this.showTaskDialog = false;
 
