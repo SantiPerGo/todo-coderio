@@ -21,7 +21,7 @@ export class CreateEditDialogComponent {
       this.taskForm = new FormGroup({
         name: new FormControl(this.task.name, [
           Validators.required,
-          Validators.maxLength(100)
+          Validators.maxLength(50)
         ]),
         description: new FormControl(this.task.description, Validators.maxLength(255)),
         priority: new FormControl(this.task.priority ?? 'NONE')

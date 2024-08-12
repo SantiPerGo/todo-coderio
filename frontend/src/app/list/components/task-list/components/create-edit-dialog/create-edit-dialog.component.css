@@ -1,3 +1,7 @@
+#dialog-overlay {
+    z-index: 3;
+}
+
 #btn-cancel {
     background-color: var(--gray);
 }

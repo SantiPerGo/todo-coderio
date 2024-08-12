@@ -47,7 +47,7 @@ export class TaskListComponent {
     });
   }
 
-  private reorderTasks() {
+  protected reorderTasks() {
     // Priority mapping
     const priorityOrder: { [key in 'NONE' | 'LOW' | 'MEDIUM' | 'HIGH']?: number } = {
       NONE: 0,
@@ -56,16 +56,27 @@ export class TaskListComponent {
       HIGH: 3
     };
   
+    // Separate tasks into completed and non-completed
+    const nonCompletedTasks = this.taskList.filter(task => !task.isCompleted);
+    const completedTasks = this.taskList.filter(task => task.isCompleted);
+  
     // Sorting function
-    this.taskList.sort((a, b) => {
+    const sortByPriorityAndName = (a: TaskDTO, b: TaskDTO) => {
       // Compare by priority first
       const priorityA = priorityOrder[a.priority ?? 'NONE'] ?? 0;
       const priorityB = priorityOrder[b.priority ?? 'NONE'] ?? 0;
       if (priorityA !== priorityB)
-        return priorityA - priorityB;
+        return priorityB - priorityA;
   
       // If priorities are the same, compare by name alphabetically
       return a.name.localeCompare(b.name);
-    });
-  }
+    };
+  
+    // Sort non-completed and completed tasks separately
+    nonCompletedTasks.sort(sortByPriorityAndName);
+    completedTasks.sort(sortByPriorityAndName);
+  
+    // Concatenate the two arrays: non-completed first, then completed
+    this.taskList = [...nonCompletedTasks.concat(completedTasks)];
+  }  
 }

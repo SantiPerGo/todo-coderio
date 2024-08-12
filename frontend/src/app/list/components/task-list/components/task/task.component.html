@@ -1,4 +1,6 @@
-<div id="container" class="flex flex-col h-full" [class]="task?.priority?.toLowerCase()">
+<div id="container" class="flex flex-col h-full"
+    [class]="task?.priority?.toLowerCase()"
+    [class.disabled]="task?.isCompleted">
     <p id="title">{{ task?.name }}</p>
     <p><span id="priority" [class]="task?.priority?.toLowerCase()" class="select-none">
         {{
@@ -10,9 +12,9 @@
     <div id="description" class="flex-grow">
         <p>{{ task?.description ?? 'There is no description for this task.' }}</p>
     </div>
-    <div class="flex justify-between items-center">
+    <div id="icons" class="flex justify-between items-center">
         <p>
-            <svg id="check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 cursor-pointer">
+            <svg id="check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 cursor-pointer" (click)="completeTask()" #confettiButton>
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>              
         </p>
