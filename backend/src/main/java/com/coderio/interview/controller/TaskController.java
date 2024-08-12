@@ -1,6 +1,7 @@
 package com.coderio.interview.controller;
 
 import com.coderio.interview.dto.TaskDTO;
+import com.coderio.interview.enums.PriorityTaskEnum;
 import com.coderio.interview.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -80,7 +81,9 @@ public class TaskController {
                     content = @Content(schema = @Schema()))
     })
     @GetMapping(value = "/filter", produces = "application/json")
-    public ResponseEntity<List<TaskDTO>> getTasksFiltered(TaskDTO task) {
-        return taskService.getTasksFiltered(task);
+    public ResponseEntity<List<TaskDTO>> getTasksFiltered(
+            @RequestParam(required = false) PriorityTaskEnum priority,
+            @RequestParam(required = false) Boolean isCompleted) {
+        return taskService.getTasksFiltered(priority, isCompleted);
     }
 }

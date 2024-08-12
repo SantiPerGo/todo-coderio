@@ -2,6 +2,7 @@ package com.coderio.interview.service;
 
 import com.coderio.interview.dto.TaskDTO;
 import com.coderio.interview.entity.Task;
+import com.coderio.interview.enums.PriorityTaskEnum;
 import com.coderio.interview.mapper.TaskMapper;
 import com.coderio.interview.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,11 +61,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public ResponseEntity<List<TaskDTO>> getTasksFiltered(TaskDTO dto) {
+    public ResponseEntity<List<TaskDTO>> getTasksFiltered(PriorityTaskEnum priority, Boolean isCompleted) {
         List<TaskDTO> list = taskRepository.findAll().stream()
             .map(TaskMapper::mapTaskEntityToDto)
-            .filter(task -> dto.getPriority() == null || task.getPriority().equals(dto.getPriority()))
-            .filter(task -> dto.getIsCompleted() == null || task.getIsCompleted() == dto.getIsCompleted())
+            .filter(task -> priority == null || (task.getPriority() != null && task.getPriority().equals(priority)))
+            .filter(task -> isCompleted == null || (task.getIsCompleted() != null && task.getIsCompleted() == isCompleted))
             .toList();
 
         if(list.isEmpty())
