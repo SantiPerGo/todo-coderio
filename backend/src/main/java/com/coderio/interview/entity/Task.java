@@ -21,7 +21,7 @@ public class Task {
     private long id;
 
     @NotBlank
-    @Size(max = 100)
+    @Size(max = 50)
     private String name;
 
     @Size(max = 255)
