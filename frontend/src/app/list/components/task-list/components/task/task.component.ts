@@ -65,7 +65,7 @@ export class TaskComponent {
       
       setTimeout(() => {
         if(!this.task) return;
-        this.task.isCompleted = this.task.isCompleted == false ? true : false;
+        this.task.isCompleted = this.task.isCompleted == true ? false : true;
         this.taskService.updateTask(this.task).subscribe({
           next: (task: TaskDTO) => this.onTaskCompleted.emit(),
           error: response => console.error(response)
