@@ -24,7 +24,7 @@ export class FiltersComponent {
       this.filters.isCompleted = dropdown.value !== 'NONE' ? dropdown.value === 'COMPLETED' : undefined;
 
     this.taskService.getTaskFiltered(this.filters.priority, this.filters.isCompleted).subscribe({
-      next: (taskList: TaskDTO[]) => this.onTaskListChange.emit(taskList),
+      next: (taskList: TaskDTO[]) => this.onTaskListChange.emit(taskList ?? []),
       error: response => console.error(response)
     })
   }
