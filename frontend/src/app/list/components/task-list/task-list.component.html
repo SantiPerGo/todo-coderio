@@ -1,9 +1,7 @@
 <app-filters (onTaskListChange)="filterTasks($event)"
     (onInputChange)="searchTasksByText($event)"></app-filters>
 
-<div class="flex-grow grid justify-items-center items-center gap-4 m-8"
-    [class.md:grid-cols-2]="taskList.length > 0" [class.lg:grid-cols-3]="taskList.length > 1"
-    [class.xl:grid-cols-4]="taskList.length > 2" [class.2xl:grid-cols-5]="taskList.length > 3">
+<div class="grid justify-items-center items-center gap-4 m-8" id="task-list">
     @for (task of filteredTasks; track task.id) {
         <app-task [task]="task" (onTaskDeleted)="deleteTask($index, $event, task)"
             (onTaskCompleted)="reorderTasks()"></app-task>

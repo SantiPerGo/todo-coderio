@@ -9,3 +9,8 @@
 #empty-task h2 {
     font-size: 2rem;
 }
+
+#task-list {
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    grid-auto-rows: 20rem;
+}

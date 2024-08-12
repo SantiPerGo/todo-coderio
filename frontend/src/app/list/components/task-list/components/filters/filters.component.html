@@ -1,9 +1,9 @@
-<div id="container" class="my-8 flex flex-col justify-center items-center gap-4 md:flex-row">
-    <p>Filters:</p>
-
-    <p>
-        <input id="name" type="text" placeholder="Write a task name" (keyup)="filterByText($event.target)">
-    </p>
+<div id="container" class="m-8 flex flex-col justify-center items-center gap-4 md:flex-row">
+    <div class="flex justify-evenly items-center w-full gap-4">
+        <span>Filters:</span>
+        <input id="name" type="text" placeholder="Write a task name"
+            (keyup)="filterByText($event.target)">
+    </div>
 
     <div class="flex justify-start items-center gap-4">
         <p>
