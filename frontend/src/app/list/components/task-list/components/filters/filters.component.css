@@ -1,0 +1,84 @@
+select {
+    border: 1px solid var(--black);
+    border-radius: 5rem;
+    padding: 0.2rem 1rem;
+    outline: transparent;
+    user-select: none;
+}
+
+#priority:has(option[value="HIGH"]:checked),
+#priority:has(option[value="MEDIUM"]:checked),
+#priority:has(option[value="LOW"]:checked) {
+    color: var(--white);
+}
+
+#priority:has(option[value="HIGH"]:checked) {
+    border-color: var(--red);
+    background-color: var(--red);
+}
+
+#priority:has(option[value="MEDIUM"]:checked) {
+    border-color: var(--yellow);
+    background-color: var(--yellow);
+}
+
+#priority:has(option[value="LOW"]:checked) {
+    border-color: var(--green);
+    background-color: var(--green);
+}
+
+#status:has(option[value="UNCOMPLETED"]:checked) {
+    color: var(--white);
+    background-color: var(--black);
+}
+
+#status:has(option[value="COMPLETED"]:checked) {
+    background: linear-gradient(105deg,
+      /* Base gradient stops */
+      var(--rainbowyellow), var(--rainbowyellow), var(--rainbowred), var(--rainbowgreen), var(--rainbowblue),
+      /* Repeat your base gradient stops */
+      var(--rainbowyellow), var(--rainbowyellow), var(--rainbowred), var(--rainbowgreen), var(--rainbowblue),
+      /* Repeat your first gradient stop */
+      var(--rainbowyellow));
+    
+    background-size: 200% 200%;
+    animation: rainbow 5s linear infinite;
+    color: var(--black);
+}
+  
+@keyframes rainbow {
+    0% { background-position: 100% 100% }
+    100% { background-position: 0% 0% }
+}
+
+select option {
+    color: var(--black);
+    background-color: var(--white);
+}
+
+/* Input styles */
+
+input,
+select {
+    padding: 0.2rem 1rem;
+    border-radius: 1rem;
+}
+
+input {
+    width: 100%;
+    border: 1px solid var(--black);
+}
+
+p {
+    width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+    p {
+        width: fit-content;
+    }
+
+    p:has(input) {
+        width: 50%;
+    }
+}

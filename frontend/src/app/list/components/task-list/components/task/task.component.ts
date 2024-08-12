@@ -56,7 +56,7 @@ export class TaskComponent {
       confetti({
         origin: origin,
         angle: 85,
-        colors: ['#ff0000', '#00ff00', '#0000ff'],
+        colors: ['#ff285b', '#228B22', '#0072E3'],
         particleCount: 100,
         scalar: 0.5,
         ticks: 100,

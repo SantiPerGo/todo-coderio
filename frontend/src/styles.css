@@ -10,6 +10,7 @@
     --darkred: rgb(191, 30, 68);
     --red: #ff285b;
     --lightred: rgba(255, 40, 91, 0.1);
+    --rainbowred: rgba(255, 40, 91, 0.5);
 
     --darkgray: #515861;
     --gray: #abb8c3;
@@ -18,11 +19,14 @@
     --darkgreen: rgb(26, 104, 26);
     --green: forestgreen;
     --lightgreen: rgba(34, 139, 34, 0.1);
+    --rainbowgreen: rgba(34, 139, 34, 0.25);
 
     --blue: #0072E3;
+    --rainbowblue: rgba(0, 114, 227, 0.25);
     
     --yellow: #fcb900;
     --lightyellow: rgba(252, 185, 0, 0.1);
+    --rainbowyellow: rgba(252, 185, 0, 0.75);
 
     font-family: "Montserrat", sans-serif;
 }

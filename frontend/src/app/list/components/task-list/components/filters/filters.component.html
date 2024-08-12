@@ -1,0 +1,26 @@
+<div id="container" class="my-8 flex flex-col justify-center items-center gap-4 md:flex-row">
+    <p>Filters:</p>
+
+    <p>
+        <input id="name" type="text" placeholder="Write a task name" (keyup)="filterByText($event.target)">
+    </p>
+
+    <div class="flex justify-start items-center gap-4">
+        <p>
+            <select id="priority" (change)="emitTasksFiltered($event.target)">
+                <option value="NONE">Priority</option>
+                <option value="LOW">Low</option>
+                <option value="MEDIUM">Medium</option>
+                <option value="HIGH">High</option>
+            </select>
+        </p>
+    
+        <p>
+            <select id="status" (change)="emitTasksFiltered($event.target)">
+                <option value="NONE">Status</option>
+                <option value="COMPLETED">Completed</option>
+                <option value="UNCOMPLETED">Uncompleted</option>
+            </select>
+        </p>
+    </div>
+</div>

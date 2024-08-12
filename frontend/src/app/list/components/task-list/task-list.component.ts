@@ -4,17 +4,19 @@ import { TaskComponent } from './components/task/task.component';
 import { CreateEditDialogComponent } from './components/create-edit-dialog/create-edit-dialog.component';
 import { TaskService } from '../../services/task.service';
 import { HttpClient } from '@angular/common/http';
+import { FiltersComponent } from './components/filters/filters.component';
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [TaskComponent, CreateEditDialogComponent],
+  imports: [TaskComponent, CreateEditDialogComponent, FiltersComponent],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.css'
 })
 export class TaskListComponent {
   protected showTaskDialog: boolean = false;
   protected taskList: TaskDTO[] = [];
+  protected filterText: string = '';
 
   constructor(private taskService: TaskService) {}
 
@@ -45,6 +47,20 @@ export class TaskListComponent {
       },
       error: response => console.error(response)
     });
+  }
+
+  protected filterTasks(list: TaskDTO[]) {
+    this.taskList = [...list];
+    this.reorderTasks();
+  }
+
+  protected searchTasksByText(text: string) {
+    this.filterText = text;
+  }
+
+  protected get filteredTasks(): TaskDTO[] {
+    return !this.filterText || this.filterText === '' ? this.taskList :
+      this.taskList.filter(task => task.name.toLowerCase().includes(this.filterText.toLowerCase()));
   }
 
   protected reorderTasks() {

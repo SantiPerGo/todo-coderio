@@ -14,17 +14,21 @@ export class CreateEditDialogComponent {
   @Output() onVisibleChange = new EventEmitter<void>();
   @Output() onTaskChange = new EventEmitter<TaskDTO>();
 
-  protected taskForm: FormGroup = new FormGroup({});
+  protected taskForm: FormGroup = new FormGroup({
+    name: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(50)
+    ]),
+    description: new FormControl('', Validators.maxLength(255)),
+    priority: new FormControl('NONE')
+  });
 
   ngOnInit() {
     if(this.task) {
-      this.taskForm = new FormGroup({
-        name: new FormControl(this.task.name, [
-          Validators.required,
-          Validators.maxLength(50)
-        ]),
-        description: new FormControl(this.task.description, Validators.maxLength(255)),
-        priority: new FormControl(this.task.priority ?? 'NONE')
+      this.taskForm.patchValue({
+        name: this.task.name,
+        description: this.task.description,
+        priority: this.task.priority ?? 'NONE'
       });
     }
   }
