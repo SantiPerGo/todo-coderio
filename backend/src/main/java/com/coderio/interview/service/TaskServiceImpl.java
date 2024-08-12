@@ -67,7 +67,7 @@ public class TaskServiceImpl implements TaskService {
             .toList();
 
         if(list.isEmpty())
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.noContent().build();
         else
             return new ResponseEntity<>(list, HttpStatus.OK);
     }

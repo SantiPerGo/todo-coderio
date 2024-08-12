@@ -77,7 +77,7 @@ public class TaskController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successful operation, returns a filtered list of tasks.",
                     content = @Content(array = @ArraySchema(schema = @Schema(implementation = TaskDTO.class)))),
-            @ApiResponse(responseCode = "404", description = "No tasks found for the given filters.",
+            @ApiResponse(responseCode = "204", description = "No tasks found for the given filters.",
                     content = @Content(schema = @Schema()))
     })
     @GetMapping(value = "/filter", produces = "application/json")
