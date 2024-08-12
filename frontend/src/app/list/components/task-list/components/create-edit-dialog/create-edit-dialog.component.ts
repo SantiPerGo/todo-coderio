@@ -42,15 +42,23 @@ export class CreateEditDialogComponent {
   }
 
   protected emitTaskValue() {
-    if(this.taskForm.valid && this.task) {
+    if(this.taskForm.valid) {
       const taskValue = this.taskForm.value;
-      this.onTaskChange.emit({
-        id: this.task.id,
-        name: taskValue.name,
-        description: taskValue.description,
-        priority: taskValue.priority === 'NONE' ? null : taskValue,
-        isCompleted: this.task.isCompleted
-      });
+
+      if(this.task)
+        this.onTaskChange.emit({
+          id: this.task.id,
+          name: taskValue.name,
+          description: taskValue.description,
+          priority: taskValue.priority === 'NONE' ? null : taskValue,
+          isCompleted: this.task.isCompleted
+        });
+      else
+        this.onTaskChange.emit({
+          name: taskValue.name,
+          description: taskValue.description,
+          priority: taskValue.priority === 'NONE' ? null : taskValue
+        });
     }
   }
 }

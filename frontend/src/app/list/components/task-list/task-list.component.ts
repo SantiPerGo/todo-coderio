@@ -30,7 +30,7 @@ export class TaskListComponent {
   }
 
   protected deleteTask(index: number, isConfirmed: boolean, task: TaskDTO) {
-    if(isConfirmed)
+    if(isConfirmed && task.id)
       this.taskService.deleteTask(task.id).subscribe({
         next: () => this.taskList.splice(index, 1),
         error: response => console.error(response)
